@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "pendnt": {
+      "transport": "streamable-http",
+      "url": "https://api.pendnt.dev/mcp",
+      "headers": {
+        "Authorization": "Bearer ${PENDNT_API_KEY}"
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+name: pendnt
+remote:
+  url: https://api.pendnt.dev/mcp
+  transport: streamable-http
+  headers:
+    Authorization: "Bearer ${PENDNT_API_KEY}"

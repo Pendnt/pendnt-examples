@@ -1,0 +1,18 @@
+# Example crontab line for running Claude Code headlessly on a schedule, with
+# permission prompts routed to pendnt and a guaranteed "run finished/failed"
+# notification. Install with `crontab -e` and paste a line like this (edit the path
+# and task, and make sure PENDNT_API_KEY is available to cron's environment — cron
+# runs with a minimal environment, so either export it in a wrapper .bashrc-style file
+# cron sources, or set it inline as below).
+#
+# Every line is wrapped in `flock -n /tmp/pendnt-job.lock` so a run that's still
+# blocked waiting on an operator's permission_prompt answer never overlaps the next
+# tick — a blocked run holds its cron slot (for up to PERMISSION_PROMPT_WAIT_S, 9 min
+# by default) but cron itself doesn't know that and will happily start another one on
+# top of it; `-n` makes the newer tick skip instead of queueing behind the lock.
+#
+# Every day at 03:00, review open PRs and merge the ones that pass CI:
+0 3 * * * PENDNT_API_KEY=aio_... PENDNT_URL=https://api.pendnt.dev flock -n /tmp/pendnt-job.lock /root/work/examples/cron-claude-code/run.sh "review open PRs and merge the ones that pass CI" >> /var/log/pendnt-cron.log 2>&1
+
+# Every 15 minutes, check a queue and act on it:
+*/15 * * * * PENDNT_API_KEY=aio_... flock -n /tmp/pendnt-job.lock /root/work/examples/cron-claude-code/run.sh "check the deploy queue and process the next item if any" >> /var/log/pendnt-cron.log 2>&1

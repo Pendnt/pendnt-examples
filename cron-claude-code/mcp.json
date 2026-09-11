@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "pendnt": {
+      "type": "http",
+      "url": "${PENDNT_URL:-https://api.pendnt.dev}/mcp",
+      "headers": {
+        "Authorization": "Bearer ${PENDNT_API_KEY}"
+      }
+    }
+  }
+}
+

@@ -1,0 +1,2 @@
+# Verified to exist on PyPI as of 2026-08-29 (https://pypi.org/pypi/claude-agent-sdk/json).
+claude-agent-sdk==0.2.148

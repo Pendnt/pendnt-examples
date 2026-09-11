@@ -1,0 +1,2 @@
+# Verified to exist on PyPI as of 2026-08-29 (https://pypi.org/pypi/langgraph/json).
+langgraph==1.2.11
